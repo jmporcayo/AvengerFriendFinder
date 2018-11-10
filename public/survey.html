@@ -1,0 +1,110 @@
+<!-- Survey/ Main Function Page for Friend Finder App -->
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Find-A-Friend</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://colorzilla.com/gradient-editor/#cb60b3+0,c146a1+50,a80077+51,db36a4+100;Pink+Gloss */">
+  <link rel="stylesheet" type="text/css" media="screen" href="css/style.css" />
+</head>
+<body>
+  
+<!-- Here are the elements needed for a survey input, named and valued at 1-5 for later calculations -->
+
+<h2>Unleash your inner Avenger and find a friend!</h2>
+
+<br>
+
+<form>
+    <h1>How much do you enjoy beating up villans?</h1>
+    <input type="radio" name="rating1" value="1" checked>err<br>
+    <input type="radio" name="rating1" value="2">ehh<br>
+    <input type="radio" name="rating1" value="3">neutral<br>
+    <input type="radio" name="rating1" value="4">cool<br>
+    <input type="radio" name="rating1" value="5">amazing!<br>
+    <br> <br> <br>
+    <h1>Would you consider yourself a violent person?</h1>
+    <input type="radio" name="rating2" value="1" checked>nah<br>
+    <input type="radio" name="rating2" value="2">not really<br>
+    <input type="radio" name="rating2" value="3">indifferent<br>
+    <input type="radio" name="rating2" value="4">sorta<br>
+    <input type="radio" name="rating2" value="5">definitely<br> 
+    <br> <br> <br>
+    <h1>Who's costume is bada$$?</h1>
+    <input type="radio" name="rating3" value="1" checked>Black Widow<br>
+    <input type="radio" name="rating3" value="2">only pants Hulk<br>
+    <input type="radio" name="rating3" value="3">beenie wearing Thor<br>
+    <input type="radio" name="rating3" value="4">all leather Hawkeye<br>
+    <input type="radio" name="rating3" value="5">red white and blue Captain America<br> 
+    <br> <br> <br>
+    <h1>How annoying is the new spiderman?</h1>
+    <input type="radio" name="rating4" value="1" checked>I don't mind him<br>
+    <input type="radio" name="rating4" value="2">little brother irritating<br>
+    <input type="radio" name="rating4" value="3">neutral<br>
+    <input type="radio" name="rating4" value="4">I'd hang with him<br>
+    <input type="radio" name="rating4" value="5">♪ He's my best friend ♫<br>  
+    <br> <br> <br>
+    <h1>Best Avengers movie?</h1>
+    <input type="radio" name="rating5" value="1" checked>The Avengers<br>
+    <input type="radio" name="rating5" value="2">Age of Ultron<br>
+    <input type="radio" name="rating5" value="3">Ragnorok<br>
+    <input type="radio" name="rating5" value="4">Cival War<br>
+    <input type="radio" name="rating5" value="5">The last Avenger<br>
+    <br> <br> <br>
+    <button id="submitBtn">Submit</button> 
+  </form>
+
+  <!-- empty div for function results -->
+
+  <div id="result"></div>
+
+  </body>
+
+  <!-- jquery link -->
+
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+  
+  <!-- This function checks the value of the radio button that is checked and POSTs the data to /api/friends, receives a parsed integer from the variables, and displays html element results -->
+
+  <script>
+
+    $("#submitBtn").click(function(e) {
+    e.preventDefault();
+    var radioValue1 = 
+    $("input[name= 'rating1']:checked").val();
+    var radioValue2 =     
+    $("input[name= 'rating2']:checked").val();
+    var radioValue3 =     
+        $("input[name= 'rating3']:checked").val();
+    var radioValue4 =     
+        $("input[name= 'rating4']:checked").val();
+    var radioValue5 =     
+        $("input[name= 'rating5']:checked").val();
+        
+        var userScore = parseInt(radioValue1, 10) + parseInt(radioValue2, 10) + parseInt(radioValue3, 10) + parseInt(radioValue4, 10) + parseInt(radioValue5, 10);
+        $.ajax({
+        type: "POST",
+        url: "/api/friends",
+        data: {userScore}
+
+    })
+    .done(function(res){
+        var names = "";
+        res.forEach(element => {
+            names += element.name + ' ';
+        });
+        $("#result").html("<h1>" + "Based off your score, " + names + " is your new homie!" + "<h1>");
+    })
+    });
+
+    
+  </script>
+  <script>
+    
+  </script>
+
+
+</html>
