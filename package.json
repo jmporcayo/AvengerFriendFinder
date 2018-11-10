@@ -1,0 +1,22 @@
+{
+  "name": "avengerfriendfinder",
+  "version": "1.0.0",
+  "description": "A dating app to find \"Friends\"",
+  "main": "server.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jmporcayo/AvengerFriendFinder.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jmporcayo/AvengerFriendFinder/issues"
+  },
+  "homepage": "https://github.com/jmporcayo/AvengerFriendFinder#readme"
+}
